@@ -1,0 +1,23 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs e temporários
+*.log
+*.tmp
+
+# Diretório de sessão local do Claude (não deve ir pro repo)
+.claude/
+
+# Dependências (não usamos npm, mas só por segurança)
+node_modules/
+
+# Vercel
+.vercel/
