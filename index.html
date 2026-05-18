@@ -3,49 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curso interativo de SQL em português. Aprenda do zero ao avançado com banco de dados real no navegador, exercícios práticos e feedback instantâneo. Sem cadastro, sem instalação.">
   <title>Curso de SQL — Aprenda do zero ao avançado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- CodeMirror 5 (syntax highlighting) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="topbar-left">
-      <div class="logo">SQL <span class="logo-accent">Curso</span></div>
-    </div>
-    <div class="topbar-center">
-      <div class="progress-info">
-        <span id="progress-text">0 / 0 aulas concluídas</span>
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <div id="streak-badge" class="streak-badge" hidden title="Dias consecutivos usando o curso">
-        <span class="streak-icon">🔥</span><span id="streak-count">0</span>
-      </div>
-      <button id="btn-achievements" class="btn-secondary" title="Conquistas">
-        <span style="margin-right:6px">🏆</span> <span id="ach-counter">0/0</span>
-      </button>
-      <button id="btn-encyclopedia" class="btn-secondary" title="Abrir Enciclopédia (Ctrl+K)">
-        <span style="margin-right:6px">📖</span> Enciclopédia
-      </button>
-      <button id="btn-reset" class="btn-ghost" title="Resetar progresso">Resetar</button>
-    </div>
-  </header>
+  <!-- ====================== LANDING PAGE ====================== -->
+  <div id="landing" class="landing">
+    <nav class="landing-nav">
+      <div class="landing-logo">SQL <span class="logo-accent">Curso</span></div>
+      <button id="btn-landing-start-top" class="btn-ghost">Começar agora →</button>
+    </nav>
 
-  <main class="layout">
-    <aside class="sidebar" id="sidebar"></aside>
-
-    <section class="content" id="content">
-      <div class="loading">Carregando...</div>
+    <section class="landing-hero">
+      <div class="hero-badge">v1.0 · 9 módulos · 30+ aulas · 60+ exercícios</div>
+      <h1 class="hero-title">Aprenda SQL do zero ao avançado</h1>
+      <p class="hero-subtitle">
+        Curso prático em português, com banco de dados real rodando no seu navegador.<br>
+        Sem cadastro, sem instalação, sem mensalidade.
+      </p>
+      <div class="hero-ctas">
+        <button id="btn-landing-start" class="btn-primary btn-xl">
+          <span id="cta-label">Começar agora</span>
+          <span class="arrow">→</span>
+        </button>
+        <button id="btn-landing-restart" class="btn-ghost btn-lg" hidden>Recomeçar do início</button>
+      </div>
+      <p class="hero-note" id="hero-progress-note" hidden></p>
     </section>
-  </main>
+
+    <section class="landing-features">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <h3>Leia teoria curta</h3>
+        <p>Explicações diretas em PT-BR com exemplos práticos. Sem enrolação, sem termo em inglês não explicado.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <h3>Resolva exercícios reais</h3>
+        <p>Editor SQL com syntax highlighting. Feedback instantâneo a cada query, em cima de um banco SQLite de verdade.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <h3>Termine no case real</h3>
+        <p>O capstone (Módulo 9) é um teste de entrevista de dados de verdade — você resolve sozinho no fim do curso.</p>
+      </div>
+    </section>
+
+    <section class="landing-curriculum">
+      <div class="section-head">
+        <h2 class="section-title">O que você vai aprender</h2>
+        <p class="section-sub">9 módulos progressivos, do "o que é uma tabela?" até window functions e CTEs.</p>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-id">M1</div><div class="module-name">Fundamentos</div><div class="module-desc">O que é SQL, tabelas, linhas, colunas, tipos de dado, anatomia da query.</div></div>
+        <div class="module-card"><div class="module-id">M2</div><div class="module-name">SELECT em detalhe</div><div class="module-desc">Apelidos com AS, escolhendo colunas, comentários.</div></div>
+        <div class="module-card"><div class="module-id">M3</div><div class="module-name">Filtrando com WHERE</div><div class="module-desc">Operadores =, &lt;&gt;, &gt;, &lt;. AND, OR, NOT, IN, BETWEEN, LIKE.</div></div>
+        <div class="module-card"><div class="module-id">M4</div><div class="module-name">Ordenando e Limitando</div><div class="module-desc">ORDER BY ASC/DESC, DISTINCT, LIMIT, OFFSET.</div></div>
+        <div class="module-card"><div class="module-id">M5</div><div class="module-name">Agregação</div><div class="module-desc">COUNT, SUM, AVG, MIN, MAX. GROUP BY, HAVING.</div></div>
+        <div class="module-card"><div class="module-id">M6</div><div class="module-name">JOINs</div><div class="module-desc">INNER, LEFT, múltiplas tabelas, chaves primárias e estrangeiras.</div></div>
+        <div class="module-card"><div class="module-id">M7</div><div class="module-name">Manipulando Dados</div><div class="module-desc">CASE WHEN, funções de string, datas (STRFTIME), COALESCE.</div></div>
+        <div class="module-card"><div class="module-id">M8</div><div class="module-name">Queries Complexas</div><div class="module-desc">Subqueries, CTEs com WITH, Window Functions (ROW_NUMBER, RANK).</div></div>
+        <div class="module-card module-card-highlight"><div class="module-id">M9</div><div class="module-name">Capstone — Case Real</div><div class="module-desc">Resolva as 3 perguntas oficiais de um case de entrevista de analista de dados.</div></div>
+      </div>
+    </section>
+
+    <section class="landing-extras">
+      <div class="section-head">
+        <h2 class="section-title">Recursos pra te ajudar</h2>
+      </div>
+      <div class="extras-grid">
+        <div class="extra-item">
+          <div class="extra-icon">📖</div>
+          <div class="extra-content">
+            <strong>Enciclopédia SQL</strong>
+            <p>55+ termos com definição, sintaxe e exemplo. Atalho <code>Ctrl+K</code>.</p>
+          </div>
+        </div>
+        <div class="extra-item">
+          <div class="extra-icon">🖱️</div>
+          <div class="extra-content">
+            <strong>Tooltips no texto</strong>
+            <p>Passa o mouse em qualquer termo SQL pra ver a definição curta na hora.</p>
+          </div>
+        </div>
+        <div class="extra-item">
+          <div class="extra-icon">🏆</div>
+          <div class="extra-content">
+            <strong>17 conquistas</strong>
+            <p>Marcos discretos pra você ver seu progresso ao longo do curso.</p>
+          </div>
+        </div>
+        <div class="extra-item">
+          <div class="extra-icon">🔥</div>
+          <div class="extra-content">
+            <strong>Streak diário</strong>
+            <p>Contador de dias consecutivos pra te manter consistente.</p>
+          </div>
+        </div>
+        <div class="extra-item">
+          <div class="extra-icon">💾</div>
+          <div class="extra-content">
+            <strong>Save automático</strong>
+            <p>Seu progresso salva no navegador. Volta amanhã, fecha aba, tanto faz.</p>
+          </div>
+        </div>
+        <div class="extra-item">
+          <div class="extra-icon">⚡</div>
+          <div class="extra-content">
+            <strong>Banco real no navegador</strong>
+            <p>SQLite compilado pra WebAssembly. Suas queries rodam de verdade, sem servidor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-final-cta">
+      <h2>Pronto pra começar?</h2>
+      <p>Em 30 minutos você já está escrevendo seus primeiros <code>SELECT</code>s.</p>
+      <button id="btn-landing-start-bottom" class="btn-primary btn-xl">
+        Iniciar curso <span class="arrow">→</span>
+      </button>
+    </section>
+
+    <footer class="landing-footer">
+      <p>Curso gratuito · Código aberto no <a href="https://github.com/faelsantos7955-lgtm/Curso---SQL" target="_blank" rel="noopener">GitHub</a> · Hospedado na Vercel</p>
+    </footer>
+  </div>
+
+  <!-- ====================== APP (escondido até clicar Começar) ====================== -->
+  <div id="app-shell" hidden>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="btn-home" class="topbar-home" title="Voltar à tela inicial">
+          SQL <span class="logo-accent">Curso</span>
+        </button>
+      </div>
+      <div class="topbar-center">
+        <div class="progress-info">
+          <span id="progress-text">0 / 0 aulas concluídas</span>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div id="streak-badge" class="streak-badge" hidden title="Dias consecutivos usando o curso">
+          <span class="streak-icon">🔥</span><span id="streak-count">0</span>
+        </div>
+        <button id="btn-achievements" class="btn-secondary" title="Conquistas">
+          <span style="margin-right:6px">🏆</span> <span id="ach-counter">0/0</span>
+        </button>
+        <button id="btn-encyclopedia" class="btn-secondary" title="Abrir Enciclopédia (Ctrl+K)">
+          <span style="margin-right:6px">📖</span> Enciclopédia
+        </button>
+        <button id="btn-reset" class="btn-ghost" title="Resetar progresso">Resetar</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <section class="content" id="content">
+        <div class="loading">Carregando...</div>
+      </section>
+    </main>
+  </div>
 
   <!-- Encyclopedia modal -->
   <div id="modal-encyclopedia" class="modal" hidden>
@@ -82,14 +207,10 @@
     </div>
   </div>
 
-  <!-- Hover tooltip for glossary terms -->
   <div id="term-tooltip" class="term-tooltip" hidden></div>
 
-  <!-- CodeMirror JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
-
-  <!-- sql.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.min.js"></script>
 
   <script src="js/sqlEngine.js"></script>
